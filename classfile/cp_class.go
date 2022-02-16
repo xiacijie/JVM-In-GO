@@ -13,3 +13,4 @@ func (self* ConstantClassInfo) Name() string {
 	return self.cp.getUtf8(self.nameIndex)
 }
 
+
