@@ -1,4 +1,6 @@
 public class Test {
+    public int a = 1;
+
     public int get() {
         return 1;
     }
