@@ -1,12 +1,12 @@
 package classfile
 
 type AttributeInfo interface {
-	readerInfo(reader* ClassReader)
+	readInfo(reader* ClassReader)
 }
 
-func readerAttributes(reader* ClassReader, cp ConstantPool) []AttributeInfo {
+func readAttributes(reader* ClassReader, cp ConstantPool) []AttributeInfo {
 	attributesCount := reader.readUint16()
-	attributes := make([]AttributeInfom , attributesCount)
+	attributes := make([]AttributeInfo , attributesCount)
 	for i := range attributes {
 		attributes[i] = readAttribute(reader, cp)
 	}
@@ -21,4 +21,18 @@ func readAttribute(reader *ClassReader, cp ConstantPool) AttributeInfo {
 	attrInfo := newAttributeInfo(attrName, attrLen, cp)
 	attrInfo.readInfo(reader)
 	return attrInfo
+}
+
+func newAttributeInfo(attrName string, attrLen uint32, cp ConstantPool) AttributeInfo {
+	switch attrName {
+		case "Code": return &CodeAttribute{cp: cp}
+		case "ConstantValue": return &ConstantValueAttribute{}
+		case "Deprecated": return &DeprecatedAttribute{}
+		case "Exceptions": return &ExceptionsAttribute{}
+		case "LineNumberTable": return &LineNumberTableAttribute{}
+		case "LocalVariableTable": return &LocalVariableTableAttribute{}
+		case "SourceFile": return &SourceFileAttribute{cp: cp}
+		case "Synthetic": return &SyntheticAttribute{}
+		default: return &UnparsedAttribute{attrName, attrLen, nil}
+	}
 }
