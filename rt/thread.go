@@ -1,6 +1,5 @@
-package runtime
+package rt
 
-import "go.starlark.net/starlark"
 type Thread struct {
 	pc int 
 	stack *Stack 

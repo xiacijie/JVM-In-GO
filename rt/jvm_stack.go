@@ -1,6 +1,5 @@
-package runtime
+package rt
 
-import "github.com/go-delve/delve/pkg/dwarf/frame"
 
 type Stack struct {
 	maxSize uint
