@@ -20,6 +20,7 @@ func newWildCardEntry(path string) CompositeEntry {
 			jarEntry := newZipEntry(path)
 			compositeEntry = append(compositeEntry, jarEntry)
 		}
+		
 
 		return nil;
 	}

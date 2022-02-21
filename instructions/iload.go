@@ -1,2 +1,0 @@
-package instructions
-import "rt"
